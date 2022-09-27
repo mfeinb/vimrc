@@ -1,6 +1,6 @@
 " installation{{{
 
-function! Meaw()
+function! Meow()
 	echo "meow!"
 endfunction
 
