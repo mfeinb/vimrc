@@ -174,9 +174,9 @@ nnoremap <leader>ll :NERDTreeToggle<CR> :TagbarToggle<CR>
 
 " }}}
 
-" git gutter template {{{
+" git gutter {{{
 
-noremap <leader>gg :GitGutterToggle
+noremap <leader>gg :GitGutterToggle<CR>
 
 " }}}
 
