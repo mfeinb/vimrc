@@ -15,6 +15,8 @@ endif
 call plug#begin()
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'preservim/nerdtree'
+Plug 'preservim/tagbar'
 call plug#end()
 
 " }}}
@@ -147,6 +149,12 @@ set laststatus=2
 
 noremap <c-f> :Files<CR>
 
+
+" }}}
+
+" NERD tree and tagbar {{{
+
+nnoremap <leader>ll :NERDTreeToggle<CR> :TagbarToggle<CR>
 
 " }}}
 
