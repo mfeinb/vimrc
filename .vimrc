@@ -1,7 +1,21 @@
 " installation{{{
 
-" need to install ctags for tag jumping on macos
-" comes with gnu/linux
+"dependencies:
+" ctags for tagging
+" bat, rg, ag for fzf
+
+" install vim-plug in case we don't have it, copied from vim-plug github 
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" list plugins with vim-plug, install by :PlugInstall, update with :PlugUpdate
+call plug#begin()
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+call plug#end()
 
 " }}}
 
@@ -14,8 +28,10 @@ noremap ;; <esc>i$;
 nnoremap <c-z> u
 
 " saving and quitting
-noremap <c-s> <esc>:w<CR>
-noremap <c-x> <esc>:wq<CR>
+inoremap <c-s> <esc>:w<CR>i
+nnoremap <c-s> :w<CR>
+inoremap <c-x> <esc>:wq<CR>
+nnoremap <c-x> :wq<CR>
 
 " folding
 nnoremap z<Left> zc
@@ -124,6 +140,13 @@ set laststatus=2
 " ^x^] - for tags only
 "
 " after that, ^n ^p go back and forth
+
+" }}}
+
+" fzf {{{
+
+noremap <c-f> :Files<CR>
+
 
 " }}}
 
