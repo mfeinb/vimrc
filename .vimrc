@@ -1,26 +1,31 @@
 " installation{{{
 
-function! Meow()
-	echo "meow!"
-endfunction
+" need to install ctags for tag jumping on macos
+" comes with gnu/linux
 
 " }}}
-
 
 
 " general mappings {{{
 
 inoremap jj <esc>
-noremap z<Left> zc
-noremap z<Right> zo
-noremap <C-d> dd
+nnoremap <C-d> dd
 noremap ;; <esc>i$;
+nnoremap <c-z> u
+
+" saving and quitting
 noremap <c-s> <esc>:w<CR>
 noremap <c-x> <esc>:wq<CR>
 
+" folding
+nnoremap z<Left> zc
+nnoremap z<Right> zo
+nnoremap [ zc<down>
+nnoremap ] zo<down>
+
 " }}}
 
-" normal/insert  {{{
+" normal/insert cursor change {{{
 
 "Mode Settings
 
@@ -41,11 +46,15 @@ let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 
 " vim settings  {{{
 
+set nocompatible
 set number
 set mouse=a
 set nocompatible 
 
+" to enable removing line with backspace
 set backspace=indent,eol,start
+" fold by syntax
+set foldmethod=syntax
 
 augroup filetype_vim
     autocmd!
@@ -53,15 +62,37 @@ augroup filetype_vim
 augroup END
 
 filetype indent on
-filetype on
+filetype plugin on
 
 syntax on
- set cursorline
+set cursorline
 " set cursorcolumn
 
 " }}}
 
-" plugins?  {{{
+" finding files {{{
+
+"search recursivly into subfolders
+set path+=**
+
+" activating wildmenu for finding files with wildcars (*)
+set wildmenu
+
+" note : using ":b" lets you autocomplete open buffers
+
+" }}}
+
+" tagging {{{
+
+" the "!" make it a shell command
+command! MakeTags !ctags -R .
+
+" go to tag under cursor
+nnoremap gd :]
+" go to ambiguous tags
+nnoremap gs g^]
+" jump back
+nnoremap gb ^t
 
 
 " }}}
@@ -85,13 +116,22 @@ set laststatus=2
 
 " }}}
 
+" autocomplete {{{
+"
+" ^n - default autocomplete
+" ^x^n - for just this file
+" ^x^f - for filenames
+" ^x^] - for tags only
+"
+" after that, ^n ^p go back and forth
+
+" }}}
 
 " fold template {{{
 
 " stuff goes here.
 
 " }}}
-
 
 
 
