@@ -17,7 +17,23 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree'
 Plug 'preservim/tagbar'
+Plug 'airblade/vim-gitgutter'
+
+" colorthemes
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'arcticicestudio/nord-vim'
+Plug 'sainnhe/everforest'
 call plug#end()
+
+" }}}
+
+" colorscheme {{{
+
+"set background=light
+"colorscheme PaperColor
+colorscheme nord
+
+
 
 " }}}
 
@@ -158,11 +174,14 @@ nnoremap <leader>ll :NERDTreeToggle<CR> :TagbarToggle<CR>
 
 " }}}
 
-" fold template {{{
+" git gutter template {{{
 
-" stuff goes here.
+noremap <leader>gg :GitGutterToggle
 
 " }}}
 
+" fold template {{{
 
 
+
+" }}}
