@@ -32,12 +32,15 @@ this will create tags filr in the main directory.
 ```
 gd goto tag under cursor.
 gb go back in the tag tree.
+* or # search the open buffer for the tag under cursor.
 ```
 
 ### finding files
 uses fzf (and tags, if you have those)
 ```
 <c-f> is calling fzf (to find a file, by file name)
+<c-g> is using fzf for searching text using rg.
+can also search tags using :Tags
 ```
 
 ### navigation
