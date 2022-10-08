@@ -30,6 +30,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'arcticicestudio/nord-vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'sainnhe/everforest'
+Plug 'ghifarit53/tokyonight-vim'
 call plug#end()
 
 " }}}
@@ -38,7 +39,12 @@ call plug#end()
 
 "set background=light
 "colorscheme PaperColor
-colorscheme nord
+set termguicolors
+"colorscheme nord
+let g:tokyonight_style = 'night' 
+let g:tokyonight_enable_italic = 1
+colorscheme tokyonight
+
 
 " }}}
 
@@ -120,7 +126,7 @@ set cursorline
 
 " }}}
 
-" finding files {{{
+" finding {{{
 
 "search recursivly into subfolders
 set path+=**
@@ -217,6 +223,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " fzf {{{
 
 noremap <c-f> :Files<CR>
+noremap <c-g> :Rg<CR>
 
 
 " }}}
