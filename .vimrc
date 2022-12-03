@@ -20,8 +20,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree'
 Plug 'preservim/tagbar'
 Plug 'ryanoasis/vim-devicons'
+Plug 'scrooloose/nerdcommenter'
 
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -149,48 +152,27 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " the "!" make it a shell command
 command! MakeTags !ctags -R .
 
-" go to tag under cursor
-nnoremap gd <c-]>
 " jump back
 nnoremap gb <c-t>
 
 
 " }}}
 
-" STATUS LINE {{{
+" auto brackets {{{
 
-"not using this since using airline now.
-" Clear status line when vimrc is reloaded.
-"set statusline=
+inoremap ( ()<Left>
+inoremap [ []<Left>
+inoremap { {}<Left>
 
-" Status line left side.
-"set statusline+=\ %F\ %M\ %Y\ %R
+inoremap <expr> <CR> search('{\%#}', 'n') ? "\<CR>\<CR>\<Up>\<C-f>" : "\<CR>"
 
-" Use a divider to separate the left side from the right side.
-"set statusline+=%=
+"inoremap <expr> <CR>         --- map the <CR> key using an expression
+"   search('{\%#}', 'n') ?    --- is the cursor ('\%#') between '{'and '}' ?
+"   "\<CR>\<CR>\<Up>\<C-f>"   --- if so, press <CR> twice, go <Up> a line, and autoindent (<C-f>),
+"   :                         --- otherwise,
+"   "\<CR>"                   --- press <CR>.
+"   from https://vi.stackexchange.com/questions/31702/how-to-make-vim-automatically-insert-closing-delimiters-and-new-lines-like-subli
 
-" Status line right side.
-"set statusline+=\ ascii:\ %b\ hex:\ 0x%B\ row:\ %l\ col:\ %c\ percent:\ %p%%
-
-" Show the status on the second to last line.
-"set laststatus=2
-
-" }}}
-
-" autocomplete {{{
-
- 
-
-" gd - goto definition
-" <c-o> - go back
-
-" those are old configs for vim settings
-" ^n - default autocomplete
-" ^x^n - for just this file
-" ^x^f - for filenames
-" ^x^] - for tags only
-"
-" after that, ^n ^p go back and forth
 
 
 " }}}
@@ -222,8 +204,8 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 
 " fzf {{{
 
-noremap <c-f> :Files<CR>
-noremap <c-g> :Rg<CR>
+noremap <c-g> :Files<CR>
+noremap <c-f> :Rg<CR>
 
 
 " }}}
@@ -305,7 +287,7 @@ let g:airline_filetype_overrides = {
 
 " git gutter {{{
 
-noremap <leader>gg :GitGutterToggle<CR>
+noremap gg :GitGutterToggle<CR>
 
 " }}}
 

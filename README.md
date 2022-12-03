@@ -9,6 +9,7 @@ all of those are command line utilities that won't be auto installed.
 ## How to install
 move .vimrc to Home. (~/.vimrc)
 On the first time, vim will install vim-plug. after that, may need to manually run ```:PlugInstall``` inside vim to make vim-plug install the plugins.
+to update plugins, use ```:PlugUpdate```.
 
 # settings
 turned on some vim settings. you can look through the code and stuff.
@@ -20,27 +21,28 @@ turned on some vim settings. you can look through the code and stuff.
 <c-x> saves and exits vim. (normal/edit)
 <c-d> delets the current line (dd)
 ;; places an ; at the end of the current line
-c-n toggle nerdtree and tagbar
+c-n toggle nerdtree and tagbar.
 ```
 
 ### creating tags
-to use tags for smart search / goto / whatever, using ctags, you can run ```:MakeTags``` inside vim. this don't have a shortcut so you won't run it by mistake.
-this will create tags filr in the main directory.
+tags are needed for many of the goto and search options, and they are using ctags.
+run ```:MakeTags``` inside vim, while in the main directory of the project.
+this don't have a shortcut so you won't run it by mistake.
+this will create tags file in the main directory.
 
 ### goto commands
-(note that most if not all require tags)
 ```
 gd goto tag under cursor.
 gb go back in the tag tree.
-* or # search the open buffer for the tag under cursor.
+* or # will highlight the tag under cursor inside the open buffer.
 ```
 
 ### finding files
 uses fzf (and tags, if you have those)
 ```
-<c-f> is calling fzf (to find a file, by file name)
-<c-g> is using fzf for searching text using rg.
-can also search tags using :Tags
+<c-f> is using "rg" for a fuzzy find.
+<c-g> is searching for files by the filename. 
+can also search tags using :Tags. this should probably have a shortcut someday.
 ```
 
 ### navigation
