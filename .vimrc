@@ -119,6 +119,12 @@ set ignorecase
 set smartcase
 set hlsearch
 
+" Set tab width to 4 spaces
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+
 " highlight matching brackets
 set showmatch
 
@@ -195,7 +201,7 @@ map <leader>t<leader> :tabnext
 noremap <C-w>- :split<cr>
 noremap <C-w>\| :vsplit<cr>
 
-" Return to last edit position when opening files (You want this!)
+" Return to last edit position when opening files
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 
@@ -269,18 +275,37 @@ nmap <leader>f  <Plug>(coc-format-selected)
 
 " NERD tree and tagbar {{{
 
+" start tagbar and nwerdtree with vim
+autocmd vimenter * NERDTree
+autocmd vimenter * Tagbar
+
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
-nnoremap <leader>ll :NERDTreeToggle<CR> :TagbarToggle<CR>
-nnoremap <c-n> :NERDTreeToggle<CR> :TagbarToggle<CR>
-inoremap <c-n> <esc> :NERDTreeToggle<CR> :TagbarToggle<CR>i
+" Limit the size of the Nerdtree window to 50 columns and 30 rows
+let g:NERDTreeWinSize=25
+let g:NERDTreeWinHigh=30
 
+" Limit the size of the Tagbar window to 50 columns and 30 rows
+let g:TagbarWinSize=35
+let g:TagbarWinHigh=30
+
+
+" set ignored files for nerdtree
 let g:NERDTreeIgnore = ['^\.DS_Store$', '^tags$', '\.git$[[dir]]', '\.idea$[[dir]]', '\.sass-cache$']
 let g:airline_filetype_overrides = {
   \ 'nerdtree': [ get(g:, 'NERDTreeStatusline', 'NRED'), '' ],
   \ 'list': [ '%y', '%l/%L'],
   \ }
+
+
+" toggle nerdtree and tagbar with C-n
+nnoremap <c-n> :NERDTreeToggle<CR> :TagbarToggle<CR>
+inoremap <c-n> <esc> :NERDTreeToggle<CR> :TagbarToggle<CR>i
+
+" open current file in nwerdtree
+nnoremap <c-o> :NERDTreeFind<cr>
+inoremap <c-o> <esc>:NERDTreeFind<CR>i
 
 
 " }}}
