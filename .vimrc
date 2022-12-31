@@ -28,12 +28,14 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'haya14busa/incsearch.vim'
 
 " colorthemes
 Plug 'arcticicestudio/nord-vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'sainnhe/everforest'
 Plug 'ghifarit53/tokyonight-vim'
+Plug 'tomasiser/vim-code-dark'
 call plug#end()
 
 " }}}
@@ -56,7 +58,7 @@ colorscheme tokyonight
 
 inoremap jj <esc>
 nnoremap <C-d> dd
-noremap ;; <esc>i$;
+noremap ;; <esc>$i;<esc>
 nnoremap <c-z> u
 
 " saving and quitting
@@ -70,6 +72,22 @@ nnoremap z<Left> zc
 nnoremap z<Right> zo
 nnoremap [ zc<down>
 nnoremap ] zo<down>
+
+" shift+arrow selection
+nmap <S-Up> v<Up>
+nmap <S-Down> v<Down>
+nmap <S-Left> v<Left>
+nmap <S-Right> v<Right>
+
+imap <S-Up> <Up>
+imap <S-Down> <Down>
+imap <S-Left> <Left>
+imap <S-Right> <Right>
+
+vmap <S-Up> <Esc>v<Up>
+vmap <S-Down> <Esc>v<Down>
+vmap <S-Left> <Esc>v<Left>
+vmap <S-Right> <Esc>v<Right>
 
 " }}}
 
@@ -276,8 +294,8 @@ nmap <leader>f  <Plug>(coc-format-selected)
 " NERD tree and tagbar {{{
 
 " start tagbar and nwerdtree with vim
-autocmd vimenter * NERDTree
-autocmd vimenter * Tagbar
+"autocmd vimenter * NERDTree
+"autocmd vimenter * Tagbar
 
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
@@ -307,12 +325,35 @@ inoremap <c-n> <esc> :NERDTreeToggle<CR> :TagbarToggle<CR>i
 nnoremap <c-o> :NERDTreeFind<cr>
 inoremap <c-o> <esc>:NERDTreeFind<CR>i
 
+" auto exit nerdtree when exiting vim
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" make vim focus on the file instead on nerdtree when starting
+autocmd VimEnter * wincmd p
+
+" Start NERDTree and Tagbar when Vim starts with a directory argument.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
+    \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'Tagbar' | execute 'cd '.argv()[0] | endif
+
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * silent NERDTreeMirror
+
+" Open NERDTree in the new tabs
+let g:nerdtree_tabs_open_on_new_tab=1
+let g:nerdtree_tabs_meaningful_tab_names=1
+let g:nerdtree_tabs_toggle=1
+let g:nerdtree_tabs_autoclose=1
+" Synchronize NERDTree's tabs
+let g:nerdtree_tabs_synchronize_view=1
+
+
 
 " }}}
 
 " git gutter {{{
 
-noremap gg :GitGutterToggle<CR>
+noremap tg :GitGutterToggle<CR>
 
 " }}}
 
